@@ -5,12 +5,16 @@ on:
     branches: [ main ]
   workflow_dispatch:
 
+permissions:
+  contents: write
+
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
     
     steps:
-      - uses: actions/checkout@v3
+      - name: Checkout
+        uses: actions/checkout@v3
       
       - name: Setup Node.js
         uses: actions/setup-node@v3
@@ -20,14 +24,15 @@ jobs:
       - name: Install Dependencies
         run: npm install
         
-      - name: Build
+      - name: Copy Files
         run: |
-          npm run build
-        env:
-          MONGODB_URI: ${{ secrets.MONGODB_URI }}
+          mkdir -p dist
+          cp -r public/* dist/
+          cp package.json dist/
+          cp server.js dist/
           
       - name: Deploy to GitHub Pages
         uses: JamesIves/github-pages-deploy-action@v4
         with:
-          folder: public
+          folder: dist
           branch: gh-pages
