@@ -1,0 +1,203 @@
+:root {
+    --dark: #191D23;
+    --dark-blue: #57707A;
+    --blue: #7E919F;
+    --light-blue: #979DAB;
+    --light-gray: #C5BAC4;
+    --white: #DEDCDC;
+    --background-gradient: linear-gradient(180deg, var(--dark) 0%, var(--dark-blue) 100%);
+    --border-radius: 24px;
+    --shadow: 0 8px 32px rgba(25, 29, 35, 0.2);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Roboto', sans-serif;
+}
+
+body {
+    background: var(--background-gradient);
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
+
+.chat-container {
+    width: 90%;
+    max-width: 800px;
+    height: 90vh;
+    background: rgba(25, 29, 35, 0.8);
+    backdrop-filter: blur(20px);
+    border-radius: var(--border-radius);
+    box-shadow: var(--shadow);
+    display: flex;
+    flex-direction: column;
+    border: 1px solid rgba(87, 112, 122, 0.2);
+}
+
+.chat-header {
+    background: var(--dark);
+    color: var(--white);
+    padding: 20px;
+    border-radius: var(--border-radius) var(--border-radius) 0 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.chat-header h1 {
+    font-size: 1.5rem;
+    font-weight: 500;
+    color: var(--white);
+}
+
+.online-status {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: var(--light-gray);
+}
+
+.status-dot {
+    width: 8px;
+    height: 8px;
+    background: var(--blue);
+    border-radius: 50%;
+    box-shadow: 0 0 10px rgba(126, 145, 159, 0.3);
+}
+
+.messages-container {
+    flex: 1;
+    padding: 20px;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    background: transparent;
+}
+
+.message {
+    max-width: 70%;
+    padding: 16px;
+    border-radius: var(--border-radius);
+    position: relative;
+    word-wrap: break-word;
+    animation: fadeIn 0.3s ease;
+    color: var(--white);
+    backdrop-filter: blur(10px);
+}
+
+.message.sent {
+    background: rgba(87, 112, 122, 0.3);
+    align-self: flex-end;
+    margin-left: auto;
+    border: 1px solid rgba(126, 145, 159, 0.2);
+}
+
+.message.received {
+    background: rgba(126, 145, 159, 0.2);
+    align-self: flex-start;
+    margin-right: auto;
+    border: 1px solid rgba(151, 157, 171, 0.2);
+}
+
+.message .username {
+    font-size: 0.8rem;
+    color: var(--light-gray);
+    margin-bottom: 4px;
+    opacity: 0.9;
+}
+
+.message .time {
+    font-size: 0.7rem;
+    color: var(--light-gray);
+    opacity: 0.7;
+    position: absolute;
+    bottom: 8px;
+    right: 12px;
+}
+
+.input-area {
+    padding: 20px;
+    background: var(--dark);
+    border-radius: 0 0 var(--border-radius) var(--border-radius);
+}
+
+.message-input-container {
+    display: flex;
+    gap: 12px;
+}
+
+input {
+    width: 100%;
+    padding: 16px;
+    background: rgba(87, 112, 122, 0.2);
+    border: 1px solid rgba(126, 145, 159, 0.2);
+    border-radius: var(--border-radius);
+    outline: none;
+    color: var(--white);
+    font-size: 0.95rem;
+    transition: all 0.3s ease;
+}
+
+input::placeholder {
+    color: var(--light-blue);
+    opacity: 0.5;
+}
+
+input:focus {
+    background: rgba(87, 112, 122, 0.3);
+    border-color: var(--blue);
+}
+
+button {
+    padding: 16px 32px;
+    background: var(--dark-blue);
+    color: var(--white);
+    border: none;
+    border-radius: var(--border-radius);
+    cursor: pointer;
+    font-size: 0.95rem;
+    transition: all 0.3s ease;
+}
+
+button:hover {
+    background: var(--blue);
+    transform: translateY(-1px);
+}
+
+button:active {
+    transform: translateY(0);
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(8px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+::-webkit-scrollbar {
+    width: 6px;
+}
+
+::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+    background: rgba(87, 112, 122, 0.3);
+    border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: rgba(87, 112, 122, 0.5);
+}
